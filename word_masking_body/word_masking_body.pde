@@ -12,10 +12,11 @@ PImage depthImg;
 PImage overlayImg;
 
 int minDepth =  100;
-int maxDepth =  2000;
+int maxDepth =  1400;
 
 void setup(){
-  size (1280, 720);
+  //size (1280, 720);
+  size (1024, 848);
   
   kinect2 = new Kinect2(this);
   //kinect2.initVideo();
@@ -30,20 +31,20 @@ void setup(){
 void draw (){
   background (0);
   textSize(14);
-  text(s, 0, 0, 1280, 720); 
+  //text(s, 0, 0, 1280, 720);
+  text(s, 0, 0, 1024, 848);
   
   rawDepth = kinect2.getRawDepth();
-  
-  for (int i=0; i < rawDepth.length; i++) {
-    if (rawDepth[i] >= minDepth && rawDepth[i] <= maxDepth) {
-      depthImg.pixels[i] = color(255);
+  for(int x=0; x<kinect2.depthWidth;x++){
+    for (int y=0; y<kinect2.depthHeight;y++){
+      if (rawDepth[x+y*kinect2.depthWidth] >= minDepth && rawDepth[x+y*kinect2.depthWidth] <= maxDepth) {
+      noStroke();
+      fill(255);
+      rect(2*x, 2*y, 2, 2);
     } else {
-      depthImg.pixels[i] = color(0,0,0,1);
+    }
     }
   }
-  depthImg.updatePixels();
-  image(depthImg, 0, 0);
-  
 }
 
 void keyPressed() {
@@ -56,5 +57,5 @@ void keyPressed() {
   } else if (key =='x') {
     maxDepth = constrain(maxDepth-100, minDepth, 1165952918);
   }
-  print("THRESHOLD: [" + minDepth + ", " + maxDepth + "]", 10, 36);
+  println("THRESHOLD: [" + minDepth + ", " + maxDepth + "]");
 }
