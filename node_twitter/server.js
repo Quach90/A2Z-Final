@@ -35,7 +35,6 @@ app.get('/timeline/:screen_name', getTweets);
 
 // Callback
 function getTweets(req, res) {
-  console.log("ondi");
   // Here's the string we are seraching for
   var screen_name = req.params.screen_name;
   console.log(screen_name);
@@ -70,7 +69,7 @@ function getTweets(req, res) {
       // Otherwise let's respond back that it worked ok!
       } else {
         
-        console.log(reply);
+        //console.log(reply);
         reply.forEach(function(e, i) {
                 // console.log("Tweet " + i);
                 // console.log("Text " + e.text);
@@ -79,7 +78,11 @@ function getTweets(req, res) {
                 tweets += e.text + " ";
         
         })
-        res.send(tweets);
+        if(tweets.length < 9500){
+          getTweet(screen_name, reply[reply.length - 1].id - 1)
+        }else{
+          res.send(tweets);
+        }   
   }
 }
 };

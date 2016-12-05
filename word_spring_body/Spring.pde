@@ -45,6 +45,13 @@ class Spring {
     if (move) { 
       rest_posy = mouseY; 
       rest_posx = mouseX;
+      //rest_posy = ypos; 
+      //rest_posx = xpos;
+      //while(moveLeft(rest_posx, rest_posy) && rest_posx > 15){
+      //  rest_posx -= 14;
+      //}
+      //rest_posy = height/2; 
+      //rest_posx = width/2;
     } 
 
     force = -k * (tempypos - rest_posy);  // f=-ky 
@@ -66,17 +73,6 @@ class Spring {
       released();
     }
   } 
-
-  // Test to see if mouse is over this spring
-  boolean overEvent() {
-    float disX = tempxpos - mouseX;
-    float disY = tempypos - mouseY;
-    if (sqrt(sq(disX) + sq(disY)) < size*10 ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   
   boolean ifThreshold(){
     if (rawDepth[int(xpos/2)+int(ypos/2)*kinect2.depthWidth] >= minDepth && rawDepth[int(xpos/2)+int(ypos/2)*kinect2.depthWidth] <= maxDepth) {
@@ -85,36 +81,18 @@ class Spring {
       return false;
     }
   }
-
-  // Make sure no other springs are active
-  boolean otherOver() {
-    for (int i=0; i<num; i++) {
-      if (i != me) {
-        if (friends[i].over == true) {
-          return true;
-        }
-      }
+  
+  boolean moveLeft(float x, float y){
+    if (rawDepth[int(x/2)+int(y/2)*kinect2.depthWidth] >= minDepth && rawDepth[int(x/2)+int(y/2)*kinect2.depthWidth] <= maxDepth) {
+      return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   void display() { 
-    if (over) { 
-      fill(153);
-    } else { 
-      fill(255);
-    } 
+    fill(255);
     text(letter, tempxpos, tempypos);
-  } 
-
-  void pressed() { 
-    
-    if (over) { 
-      move = true;
-    } else { 
-      move = false;
-    }
-    //move = true;
   } 
 
   void released() { 
