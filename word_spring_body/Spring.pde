@@ -90,8 +90,12 @@ class Spring {
     }
   }
 
-  void display() { 
-    fill(255);
+  void display() {
+    if(move){
+      fill(127);
+    }else{
+      fill(255);
+    }
     text(letter, tempxpos, tempypos);
   } 
 
