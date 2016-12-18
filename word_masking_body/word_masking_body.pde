@@ -12,7 +12,7 @@ PImage depthImg;
 PImage overlayImg;
 
 int minDepth =  100;
-int maxDepth =  1400;
+int maxDepth =  1300;
 
 void setup(){
   //size (1280, 720);

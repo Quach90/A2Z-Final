@@ -18,8 +18,8 @@ int y = 14;
 PImage depthImg;
 PImage overlayImg;
 
-int minDepth =  500;
-int maxDepth =  2000;
+int minDepth =  200;
+int maxDepth =  1800;
 
 String screenName = "ondinafrate";
 
@@ -49,7 +49,7 @@ void setup(){
   
   num = chars.length;
   println(num);
-  //textSize(14);
+  //textSize(12);
   
   for (int i = 0; i < chars.length; i++)
   {

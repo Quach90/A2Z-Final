@@ -1,4 +1,6 @@
 class Spring { 
+  
+  boolean useMouse = true;
   // Screen values 
   float xpos, ypos;
   float tempxpos, tempypos; 
@@ -43,13 +45,16 @@ class Spring {
 
   void update() { 
     if (move) { 
-      rest_posy = mouseY; 
-      rest_posx = mouseX;
-      //rest_posy = ypos; 
-      //rest_posx = xpos;
-      //while(moveLeft(rest_posx, rest_posy) && rest_posx > 15){
-      //  rest_posx -= 14;
-      //}
+      if(useMouse){
+        rest_posy = mouseY; 
+        rest_posx = mouseX;
+      }else{
+        rest_posy = ypos; 
+        rest_posx = xpos;
+        while(moveLeft(rest_posx, rest_posy) && rest_posx > 15){
+          rest_posx -= 14;
+        }
+      }
       //rest_posy = height/2; 
       //rest_posx = width/2;
     } 
