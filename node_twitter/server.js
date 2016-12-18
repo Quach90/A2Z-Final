@@ -75,12 +75,13 @@ function getTweets(req, res) {
                 // console.log("Text " + e.text);
                 // generator.feed(e.text);
                 // tweetCounter++;
-                tweets += e.text + " ";
+                tweets += e.text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '') + " ";
 
         })
         if(tweets.length < 9500 && reply.length == 200){
           getTweet(screen_name, reply[reply.length - 1].id - 1)
         }else{
+
           res.send(tweets);
         }
   }
