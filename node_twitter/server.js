@@ -68,7 +68,7 @@ function getTweets(req, res) {
         res.send(err);
       // Otherwise let's respond back that it worked ok!
       } else {
-        
+
         //console.log(reply);
         reply.forEach(function(e, i) {
                 // console.log("Tweet " + i);
@@ -76,13 +76,13 @@ function getTweets(req, res) {
                 // generator.feed(e.text);
                 // tweetCounter++;
                 tweets += e.text + " ";
-        
+
         })
-        if(tweets.length < 9500){
+        if(tweets.length < 9500 && reply.length == 200){
           getTweet(screen_name, reply[reply.length - 1].id - 1)
         }else{
           res.send(tweets);
-        }   
+        }
   }
 }
 };
